@@ -5,16 +5,16 @@ var Happner = require('happner');
 
 Happner.create(config).then(
   function(mesh) {
-    // setTimeout(function() {
-    //   mesh.stop({
-    //     kill: false,    // kill the process once stopped
-    //     wait: 10000,    // wait for callbacks before kill
-    //     exitCode: 1,    // when kill exist with this integer
-    //     reconnect: true // inform attached clients/endpoints to reconnect
-    //   }, function(data) {
-    //     console.log('stopped');
-    //   });
-    // }, 5000);
+    setInterval(function() {
+      mesh.exchange.basic_endpoint.component.method(function(err, res) {
+        if (err) return console.error('ERR', err);
+        console.error('RES', res);
+      });
+    }, 1000);
+
+    mesh.event.basic_endpoint.component.on('pa/th', function(data, meta) {
+      console.log('EVT', data);
+    })
   },
   function(err) {
     console.error(err.stack);
@@ -22,12 +22,3 @@ Happner.create(config).then(
   }
 )
 
-// Also start another
-
-// Happner.create().then(
-//   function(mesh) {},
-//   function(err) {
-//     console.error(err.stack);
-//     process.exit(1);
-//   }
-// )

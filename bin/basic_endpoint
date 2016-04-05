@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+var config = require('../config/basic_endpoint');
+var Happner = require('happner');
+
+Happner.create(config).then(
+  function(mesh) {
+  },
+  function(err) {
+    console.error(err.stack);
+    process.exit(1);
+  }
+)
