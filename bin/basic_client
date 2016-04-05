@@ -35,7 +35,7 @@ client.on('connection/ended', function(data) {
 })
 
 client.on('reconnect/scheduled', function(data) {
-  console.log('reconnect-scheduled', data);
+  console.log('reconnect/scheduled', data);
 })
 
 client.on('reconnect/successful', function(data) {
