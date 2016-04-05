@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+
+require('dotenv').config();
+
+var MeshClient = require('happner').MeshClient;
+var client = new MeshClient({
+  host: process.env.BASIC_SERVER_HOST,
+  port: process.env.BASIC_SERVER_PORT
+})
+
+client.login({username: 'xxx'})
+
+client.on('login/allow', function(data) {
+  console.log('login/allow', data);
+})
+
+client.on('login/deny', function(data) {
+  console.log('login/deny', data);
+})
+
+client.on('login/error', function(err) {
+  console.log('login/error', err);
+})
+
+client.on('create/components', function(data) {
+  console.log('create/components', data);
+})
+
+client.on('destroy/components', function(data) {
+  console.log('destroy/components', data);
+})
+
+client.on('connection/ended', function(data) {
+  console.log('connection/ended', data);
+})
+
+client.on('reconnect/scheduled', function(data) {
+  console.log('reconnect-scheduled', data);
+})
+
+client.on('reconnect/successful', function(data) {
+  console.log('reconnect/successful', data);
+})
